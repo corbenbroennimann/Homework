@@ -30,26 +30,27 @@ class DBHelper (context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun addMember(id: Int,fstName: String, lstName: String, rewards: Int){
         val values = ContentValues()
 
+        if(id != null && fstName != null && lstName != null && rewards != null) {
+            values.put(UNIQUE_ID_COL, id)
+            values.put(FIRST_NAME_COL, fstName)
+            values.put(LAST_NAME_COL, lstName)
+            values.put(REWARDS_COL, rewards)
 
-        values.put(UNIQUE_ID_COL,id)
-        values.put(FIRST_NAME_COL,fstName)
-        values.put(LAST_NAME_COL,lstName)
-        values.put(REWARDS_COL, rewards)
+            val db = this.writableDatabase
+            checkMember(id)
 
-        val db = this.writableDatabase
-        checkMember(id)
+            if (checkMember(id)) {
+                //db.update(TABLE_NAME, values, "$UNIQUE_ID_COL=1", arrayOf())
+                deleteMember(id)
 
-        if(checkMember(id)){
-            //db.update(TABLE_NAME, values, "$UNIQUE_ID_COL=1", arrayOf())
-            deleteMember(id)
-
-        }
+            }
             db.insert(TABLE_NAME, null, values)
 
 
 
 
-        db.close()
+            db.close()
+        }
     }
 
     fun getMember(id: Int) : Cursor{

@@ -23,14 +23,18 @@ class MainActivity : AppCompatActivity() {
             val lastName = binding.enterLastName.text.toString()
             val reward = binding.enterRewards.text.toString().toInt()
 
-            db.addMember(id,firstName,lastName,reward)
+            try {
+                db.addMember(id, firstName, lastName, reward)
+            } catch(e:Exception) {
 
-            Toast.makeText(this, id.toString() + " added to database", Toast.LENGTH_LONG).show()
+            }
+                Toast.makeText(this, id.toString() + " added to database", Toast.LENGTH_LONG).show()
 
-            binding.enterUniqueID.text.clear()
-            binding.enterFirstName.text.clear()
-            binding.enterLastName.text.clear()
-            binding.enterRewards.text.clear()
+                binding.enterUniqueID.text.clear()
+                binding.enterFirstName.text.clear()
+                binding.enterLastName.text.clear()
+                binding.enterRewards.text.clear()
+
         }
 
         binding.deleteMember.setOnClickListener {
@@ -38,9 +42,10 @@ class MainActivity : AppCompatActivity() {
             try {
                 db.deleteMember(binding.enterID.text.toString().toInt())
                 binding.enterID.text.clear()
-            } catch(e: Exception) {
+            } catch (e: Exception) {
 
             }
+
         }
 
         binding.displayInfo.setOnClickListener {
