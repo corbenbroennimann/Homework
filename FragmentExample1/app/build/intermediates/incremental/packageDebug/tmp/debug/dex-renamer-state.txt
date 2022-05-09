@@ -1,0 +1,4 @@
+#Sun May 08 16:59:02 HST 2022
+base.0=C\:\\Users\\drcar\\AndroidStudioProjects\\FragmentExample_start\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+renamed.0=classes.dex
+path.0=classes.dex
